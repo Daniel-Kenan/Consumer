@@ -1,0 +1,476 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 142.1 100% 24%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142.1 100% 24%;
+    --radius: 0.5rem;
+    --success: 142.1 70% 45%;
+    --success-foreground: 210 40% 98%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142.1 70% 45%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 142.1 70% 45%;
+    --success: 142.1 70% 45%;
+    --success-foreground: 210 40% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ReactFlow customization */
+.react-flow__node {
+  @apply rounded-md border border-border bg-card text-card-foreground shadow-sm;
+  padding: 0;
+  overflow: visible;
+}
+
+.react-flow__node-trigger {
+  @apply border-l-4 border-l-[#007A33];
+}
+
+.react-flow__node-action {
+  @apply border-l-4 border-l-blue-500;
+}
+
+.react-flow__node-logic {
+  @apply border-l-4 border-l-purple-500;
+}
+
+.react-flow__node-code {
+  @apply border-l-4 border-l-amber-500;
+}
+
+.react-flow__node-ai {
+  @apply border-l-4 border-l-cyan-500;
+}
+
+.react-flow__node-message {
+  @apply border-l-4 border-l-pink-500;
+}
+
+.react-flow__node-integration {
+  @apply border-l-4 border-l-orange-500;
+}
+
+.react-flow__node-banking {
+  @apply border-l-4 border-l-emerald-500;
+}
+
+/* Handle styling */
+.react-flow__handle {
+  background-color: hsl(var(--primary)) !important;
+  border-color: hsl(var(--background)) !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+/* Edge styling */
+.react-flow__edge-path {
+  stroke: hsl(var(--muted-foreground)) !important;
+  opacity: 0.7;
+  stroke-width: 1.5;
+}
+
+/* Dashed edge path */
+.react-flow__edge.dashed .react-flow__edge-path,
+.react-flow__edge-dashed .react-flow__edge-path {
+  stroke-dasharray: 5, 5 !important;
+}
+
+/* Dotted edge path */
+.react-flow__edge.dotted .react-flow__edge-path,
+.react-flow__edge-dotted .react-flow__edge-path {
+  stroke-dasharray: 2, 2 !important;
+}
+
+/* Green edge path */
+.react-flow__edge.green .react-flow__edge-path {
+  stroke: hsl(var(--primary)) !important;
+  opacity: 0.9;
+}
+
+/* Blue edge path */
+.react-flow__edge.blue .react-flow__edge-path {
+  stroke: hsl(210, 100%, 60%) !important;
+  opacity: 0.9;
+}
+
+/* AI edge path */
+.react-flow__edge.ai .react-flow__edge-path {
+  stroke: hsl(190, 100%, 50%) !important;
+  opacity: 0.9;
+}
+
+/* Conditional edge paths */
+.react-flow__edge.condition-true .react-flow__edge-path {
+  stroke: hsl(142, 76%, 36%) !important;
+  opacity: 0.9;
+}
+
+.react-flow__edge.condition-false .react-flow__edge-path {
+  stroke: hsl(0, 84%, 60%) !important;
+  opacity: 0.9;
+}
+
+/* Animated edges */
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5, 5 !important;
+  animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+  from {
+    stroke-dashoffset: 10;
+  }
+}
+
+/* Edge labels */
+.react-flow__edge-textbg {
+  background-color: hsl(var(--background)) !important;
+}
+
+.react-flow__edge-text {
+  fill: hsl(var(--foreground)) !important;
+  font-size: 10px !important;
+}
+
+.react-flow__attribution {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.react-flow__background {
+  background-color: hsl(var(--background)) !important;
+  background-image: radial-gradient(hsl(var(--border)) 1px, transparent 1px) !important;
+  background-size: 20px 20px !important;
+}
+
+.react-flow__minimap {
+  background-color: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.react-flow__controls {
+  background-color: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.react-flow__controls-button {
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.react-flow__controls-button:hover {
+  background-color: hsl(var(--muted)) !important;
+}
+
+/* Node content styling */
+.node-content {
+  @apply p-3 min-w-[180px];
+}
+
+.node-header {
+  @apply flex items-center gap-2 mb-1;
+}
+
+.node-icon {
+  @apply flex h-6 w-6 items-center justify-center rounded-full bg-primary/20 text-primary;
+}
+
+.node-title {
+  @apply font-medium flex-1;
+}
+
+.node-actions {
+  @apply flex items-center;
+}
+
+.node-action-button {
+  @apply p-1 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground;
+}
+
+.node-subtitle {
+  @apply text-xs text-muted-foreground;
+}
+
+/* AI node styling */
+.ai-node-options {
+  @apply mt-2 grid gap-1;
+}
+
+.ai-node-option {
+  @apply flex items-center gap-2 rounded-sm border border-dashed border-border p-2 text-xs;
+}
+
+.ai-node-option-icon {
+  @apply flex h-6 w-6 items-center justify-center rounded-full bg-primary/20 text-primary;
+}
+
+/* Tool badges */
+.tool-badge {
+  @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80;
+}
+
+/* Workflow editor tabs */
+.workflow-tabs {
+  @apply inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground;
+}
+
+.workflow-tab {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow;
+}
+
+/* Workflow controls */
+.workflow-controls {
+  @apply flex items-center gap-2;
+}
+
+.workflow-status-toggle {
+  @apply relative inline-flex h-6 w-11 items-center rounded-full border-2 border-transparent bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state=checked]:bg-primary;
+}
+
+.workflow-status-thumb {
+  @apply pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0;
+}
+
+/* Badge variants */
+.badge-variant-success {
+  background-color: hsl(var(--success) / 0.1);
+  color: hsl(var(--success));
+  border-color: hsl(var(--success) / 0.2);
+}
+
+.badge-variant-destructive {
+  background-color: hsl(var(--destructive) / 0.1);
+  color: hsl(var(--destructive));
+  border-color: hsl(var(--destructive) / 0.2);
+}
+
+/* Integration node styling */
+.integration-node-icon {
+  @apply flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/20 text-orange-500;
+}
+
+/* Banking node styling */
+.banking-node-icon {
+  @apply flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-500;
+}
+
+/* Add these styles to improve the tab navigation */
+.node-selector-tabs {
+  @apply w-full;
+}
+
+.node-selector-tabs .node-selector-tabslist {
+  @apply flex overflow-x-auto pb-2 mb-4;
+}
+
+.node-selector-tabs .node-selector-tabstrigger {
+  @apply flex items-center gap-1.5 px-3 py-1.5 whitespace-nowrap border-b-2 border-transparent data-[state=active]:border-primary;
+}
+
+.node-selector-tabs .node-selector-tabstrigger[data-state="active"] {
+  @apply bg-primary/10 text-primary font-medium;
+}
+
+.node-selector-tabs .node-selector-tabscontent {
+  @apply space-y-1 mt-2;
+}
+
+/* Improve the TabsList styling */
+.react-flow__node-selector .TabsList {
+  @apply flex flex-wrap gap-1 mb-4;
+}
+
+/* Make the tabs more visible */
+.TabsTrigger {
+  @apply px-3 py-1.5 text-sm font-medium border rounded-md border-border;
+}
+
+.TabsTrigger[data-state="active"] {
+  @apply bg-primary/10 text-primary border-primary;
+}
+
+/* No arrow edge styling */
+.react-flow__edge-noArrow .react-flow__edge-path {
+  stroke: hsl(var(--muted-foreground)) !important;
+  opacity: 0.7;
+  stroke-width: 1.5;
+}
+
+/* Data source node styling */
+.react-flow__node[data-is-data-source="true"] {
+  @apply border-dashed;
+}
+
+/* Simulation mode styling */
+.simulation-node-active {
+  --ring-width: 2px;
+  --ring-offset-width: 2px;
+  --ring-color: hsl(var(--primary));
+  --ring-offset-color: hsl(var(--background));
+  box-shadow: 0 0 0 var(--ring-offset-width) var(--ring-offset-color), 0 0 0
+    calc(var(--ring-width) + var(--ring-offset-width)) var(--ring-color), 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px
+    -2px rgba(0, 0, 0, 0.05) !important;
+  animation: pulse-primary 2s infinite;
+}
+
+.simulation-node-completed {
+  --ring-width: 2px;
+  --ring-offset-width: 2px;
+  --ring-color: hsl(var(--success));
+  --ring-offset-color: hsl(var(--background));
+  box-shadow: 0 0 0 var(--ring-offset-width) var(--ring-offset-color), 0 0 0
+    calc(var(--ring-width) + var(--ring-offset-width)) var(--ring-color) !important;
+}
+
+.simulation-node-error {
+  --ring-width: 2px;
+  --ring-offset-width: 2px;
+  --ring-color: hsl(var(--destructive));
+  --ring-offset-color: hsl(var(--background));
+  box-shadow: 0 0 0 var(--ring-offset-width) var(--ring-offset-color), 0 0 0
+    calc(var(--ring-width) + var(--ring-offset-width)) var(--ring-color) !important;
+}
+
+.simulation-edge-active .react-flow__edge-path {
+  stroke: hsl(var(--primary)) !important;
+  stroke-width: 2.5 !important;
+  opacity: 1 !important;
+  animation: pulse-edge 2s infinite;
+}
+
+@keyframes pulse-primary {
+  0% {
+    box-shadow: 0 0 0 var(--ring-offset-width) var(--ring-offset-color), 0 0 0
+      calc(var(--ring-width) + var(--ring-offset-width)) var(--ring-color), 0 0 0 0 rgba(0, 122, 51, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 var(--ring-offset-width) var(--ring-offset-color), 0 0 0
+      calc(var(--ring-width) + var(--ring-offset-width)) var(--ring-color), 0 0 0 6px rgba(0, 122, 51, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 var(--ring-offset-width) var(--ring-offset-color), 0 0 0
+      calc(var(--ring-width) + var(--ring-offset-width)) var(--ring-color), 0 0 0 0 rgba(0, 122, 51, 0);
+  }
+}
+
+@keyframes pulse-edge {
+  0% {
+    stroke-opacity: 1;
+  }
+  50% {
+    stroke-opacity: 0.6;
+  }
+  100% {
+    stroke-opacity: 1;
+  }
+}
+
+/* Success color variant */
+.text-success {
+  color: hsl(var(--success));
+}
+
+.bg-success\/10 {
+  background-color: hsl(var(--success) / 0.1);
+}
+
+.border-success\/20 {
+  border-color: hsl(var(--success) / 0.2);
+}
+
+/* Add this at the end of the file */
+
+/* Fullscreen mode for workflow editor */
+.workflow-editor-fullscreen {
+  overflow: hidden;
+}
+
+.workflow-editor-fullscreen .workflow-editor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Ensure dialogs appear above the fullscreen container */
+.workflow-editor-fullscreen [role="dialog"] {
+  z-index: 10000;
+}
+
+/* Dark mode support */
+.dark .workflow-editor-fullscreen .workflow-editor-container {
+  background-color: hsl(var(--background));
+}
+
+/* Add this CSS rule at the end of the file */
+
+/* Ensure dropdowns appear above everything in fullscreen mode */
+.workflow-editor-fullscreen .SelectContent,
+.workflow-editor-fullscreen [data-radix-popper-content-wrapper] {
+  z-index: var(--dropdown-z-index, 9999) !important;
+}
+
+/* Make sure the dialog content also has proper z-index */
+.workflow-editor-fullscreen [role="dialog"] {
+  z-index: 10000 !important;
+}
+
+/* Version control panel animation */
+.version-control-backdrop {
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.version-control-panel {
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
