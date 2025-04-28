@@ -45,6 +45,9 @@ import {
   FileInput as FormInputIcon,
 } from "lucide-react"
 
+
+import { BASE_URL } from "@/lib/env-config"
+
 // Mapping string keys from API to Lucide icon components
 const iconMapping: Record<string, React.ReactNode> = {
   Clock: <Clock className="h-4 w-4 text-white" />,
@@ -125,8 +128,11 @@ export default function NodeSelector({ onAddNode }: NodeSelectorProps) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+
+  
+
   useEffect(() => {
-    fetch("http://localhost:5000/node-categories")
+    fetch(`${BASE_URL}/node-categories`)
       .then((res) => {
         if (!res.ok) throw new Error(res.statusText)
         return res.json()

@@ -1,6 +1,11 @@
+
+
 # ─── Stage 1: Builder ─────────────────────────────────────────────────────────
 FROM node:18-alpine AS builder
 WORKDIR /app
+
+ENV BASE_SERVER_URL_DEV=http://localhost
+ENV PORT_DEV=8765
 
 # 1. Install everything (including devDeps) but skip strict peer checks
 COPY package.json package-lock.json pnpm-lock.yaml ./

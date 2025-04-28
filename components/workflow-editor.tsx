@@ -55,6 +55,7 @@ import {
 import { nodeTypes, edgeTypes } from "@/components/workflow-node-types"
 import { EnhancedCodeEditor } from "@/components/enhanced-code-editor"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { BASE_URL } from "@/lib/env-config"
 
 // Create a separate component for the flow content
 function FlowContent() {
@@ -872,7 +873,7 @@ function FlowContent() {
       // Create a download link and trigger the download
   
       
-    await fetch("http://localhost:5000/workflow/run", 
+    await fetch(`${BASE_URL}/workflow/run`, 
       {
         method: "POST",
         headers: {

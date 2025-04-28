@@ -25,6 +25,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
+import { BASE_URL } from "@/lib/env-config"
 
 type Environment = "DEV" | "ETE" | "QA" | "PROD"
 
@@ -60,7 +61,7 @@ export default function WorkflowList() {
   useEffect(() => {
     async function fetchWorkflows() {
       try {
-        const res = await fetch("http://localhost:5000/workflows")
+        const res = await fetch(`${BASE_URL}/workflows`)
         if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`)
         const data: Workflow[] = await res.json()
         setWorkflows(data)

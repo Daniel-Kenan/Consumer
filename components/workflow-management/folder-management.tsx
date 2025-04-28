@@ -34,6 +34,7 @@ import {
   Bot,
   ArrowRight,
 } from "lucide-react"
+import { BASE_URL } from "@/lib/env-config"
 
 type Environment = "DEV" | "ETE" | "QA" | "PROD"
 
@@ -81,7 +82,7 @@ export default function FolderManagement() {
     async function fetchData() {
       try {
         const [wRes] = await Promise.all([
-          fetch("http://localhost:5000/workflows"),
+          fetch(`${BASE_URL}/workflows`),
         ]);
         if (!wRes.ok) throw new Error(`Fetch error`);
         const wData = await wRes.json();
