@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { FileImage, FileJson } from "lucide-react"
+import { CheckCircle, FileImage, FileJson } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "@/components/ui/use-toast"
 import { Slider } from "@/components/ui/slider"
 import html2canvas from "html2canvas"
+import { ToastAction } from "@radix-ui/react-toast"
 
 // Define the size presets with their resolutions
 const SIZE_PRESETS = {
@@ -128,9 +129,12 @@ export function ExportWorkflowDialog({ open, onOpenChange, onExport, reactFlowIn
         URL.revokeObjectURL(url)
 
         toast({
-          title: "Export Successful",
-          description: "Workflow exported as JSON",
+          title: 'Export Successful',
+          description: 'Workflow exported as JSON',
           duration: 2000,
+          variant: 'default',           // or 'destructive' for red
+          action: <ToastAction altText="View JSON">View</ToastAction>,
+          className: 'bg-green-600 text-white [&>svg]:text-white',
         })
 
         onOpenChange(false)

@@ -49,6 +49,8 @@ import {
   RotateCw,
   LayoutTemplateIcon as Template,
   Import,
+  CirclePlay,
+  Square,
 } from "lucide-react"
 import { nodeTypes, edgeTypes } from "@/components/workflow-node-types"
 import { EnhancedCodeEditor } from "@/components/enhanced-code-editor"
@@ -75,7 +77,7 @@ function FlowContent() {
   const [redoStack, setRedoStack] = useState<any[]>([])
   const [copiedNode, setCopiedNode] = useState(null)
   const editorRef = useRef(null)
-  const [reactFlowInstance, setReactFlowInstance] = useState(null)
+  const [reactFlowInstance, setReactFlowInstance] = useState<import("reactflow").ReactFlowInstance | null>(null)
   const [apiDialogOpen, setApiDialogOpen] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [isImporting, setIsImporting] = useState(false)
@@ -836,6 +838,72 @@ function FlowContent() {
     setExportDialogOpen(false)
   }
 
+
+  const runWorkflow = async () => {
+
+      // Export as JSON
+      setRunningWorkflow(true)
+
+      let flowObject
+  
+      if (typeof (reactFlowInstance as any).toObject === "function") {
+        flowObject = (reactFlowInstance as any).toObject();
+      } else if (
+        typeof (reactFlowInstance as any).getNodes === "function" &&
+        typeof (reactFlowInstance as any).getEdges === "function"
+      ) {
+        flowObject = {
+          nodes: (reactFlowInstance as any).getNodes(),
+          edges: (reactFlowInstance as any).getEdges(),
+          viewport: (reactFlowInstance as any).getViewport ? (reactFlowInstance as any).getViewport() : { x: 0, y: 0, zoom: 1 },
+        }
+      } else {
+        // Fallback for other versions
+        flowObject = {
+          nodes: (reactFlowInstance as any).nodes || [],
+          edges: (reactFlowInstance as any).edges || [],
+          viewport: (reactFlowInstance as any).viewport || { x: 0, y: 0, zoom: 1 },
+        }
+      }
+
+      const jsonString = JSON.stringify(flowObject, null, 2)
+ 
+
+      // Create a download link and trigger the download
+  
+      
+    await fetch("http://localhost:5000/workflow/run", 
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          workflow: jsonString
+      })}
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Workflow run result:", data)
+        setRunningWorkflow(false)
+          toast({
+          title: "Workflow Successfully",
+          description: "Workflow executed successfully",
+          duration: 2000,
+        })
+      })
+      .catch((error) => {
+        console.error("Error running workflow:", error)
+        setRunningWorkflow(false)
+        toast({
+          title: "Error running workflow:",
+          description: error.message,
+          duration: 2000,
+        })
+      }
+    )
+  }
+
   // Add state for export options
   const [exportType, setExportType] = useState("png")
   const [backgroundColor, setBackgroundColor] = useState("#ffffff")
@@ -843,6 +911,7 @@ function FlowContent() {
   const [exportSize, setExportSize] = useState("medium")
   const [customWidth, setCustomWidth] = useState(1200)
   const [customHeight, setCustomHeight] = useState(800)
+  const [runningWorkflow, setRunningWorkflow] = useState(false)
 
   // Update the main container div to include our new class
   return (
@@ -927,6 +996,14 @@ function FlowContent() {
         </div>
 
         <div className="flex items-center gap-2">
+
+          <Button variant="outline" size="icon" onClick={runWorkflow}>
+
+            {!runningWorkflow ? 
+            <CirclePlay className="h-4 w-4" /> : 
+            <Square className="h-4 w-4" />
+            }
+          </Button>
           <Button variant="outline" size="icon" onClick={toggleSidebar}>
             <PanelLeft className="h-4 w-4" />
           </Button>
